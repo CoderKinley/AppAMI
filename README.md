@@ -1,77 +1,145 @@
-# DT Meter Data Collection App
+# AMI
+
+## Advanced Metering Infrastructure Solution for Bhutan Power Corporation
 
 ## Overview
-The **DT Meter Data Collection App** is a professional application developed for **Bhutan Power Corporation (BPC)** to streamline the collection of energy meter data from approximately **5000 Distribution Transformers** (DTs) across Bhutan. This app is designed to improve efficiency, accuracy, and accessibility in monitoring and managing energy consumption data.
+
+AMI is a sophisticated Advanced Metering Infrastructure (AMI) application custom-developed for Bhutan Power Corporation to monitor, collect, and analyze energy meter data from approximately 5,000 Distribution Transformers across Bhutan. This enterprise-grade solution enables real-time monitoring, data acquisition, and comprehensive analysis of the electrical distribution network throughout the country.
 
 ## Features
-- **Real-Time Data Collection**: Fetches energy meter readings via APIs and stores data securely.
-- **API Integration**: Connects with Bhutan Power Corporation’s central system for seamless data exchange.
-- **User Authentication**: Secure login system with role-based access.
-- **Offline Mode**: Allows data collection even without internet connectivity, syncing when online.
-- **Data Visualization**: Displays collected data in graphical and tabular formats for quick analysis.
-- **Search & Filter**: Users can search for specific DTs and filter data based on different parameters.
-- **Export & Reports**: Generate and export reports in CSV or PDF format for further analysis.
 
-## Technologies Used
-| Technology  | Purpose  |
-|-------------|----------|
-| **SQLite**  | Local database storage for offline access |
-| **REST API** | Fetching real-time data from BPC’s central server |
-| **Google Maps API** | Visual representation of DT locations |
+### Core Functionality
+- **Real-time Meter Data Collection**: Automated collection of meter readings from distribution transformers across Bhutan
+- **Instant Parameter Monitoring**: Live monitoring of electrical parameters for quick issue detection
+- **Load Profile Analysis**: Detailed load profile monitoring with both standard (Profile 0) and advanced (Profile 1) data collection
+- **Event Logging & Alerts**: Comprehensive tracking of power quality events and automated notifications
+- **Configuration Management**: Centralized management of meter configurations and settings
+- **Historical Data Storage**: Long-term data archiving for analysis and reporting
+
+### Advanced Capabilities
+- **Geographic Information System (GIS)**: Spatial visualization of distribution network and transformer locations
+- **MRI Monitoring**: Advanced Meter Reading Instrument monitoring capabilities
+- **Reliability Indices**: Automated calculation of power reliability metrics (SAIDI, SAIFI, CAIDI)
+- **Points of Interest (POI)**: Management of critical infrastructure points
+- **Billing Integration**: Seamless integration with billing systems
+
+### Technical Features
+- **Modern UI**: Clean, professional interface designed for operator efficiency
+- **Role-based Access Control**: Secure user management with granular permissions
+- **RESTful API Integration**: Robust API architecture for data exchange with other corporate systems
+- **MQTT Implementation**: Lightweight messaging protocol for efficient real-time data transmission from remote meters
+- **Scalable Architecture**: Designed to support thousands of devices with minimal performance impact
+- **Offline Capabilities**: Continues functioning during intermittent connectivity issues
 
 ## System Architecture
-1. **User Authentication**
-   - Secure login using Firebase authentication.
-   - Role-based access control.
-2. **Data Fetching & Storage**
-   - API integration with Bhutan Power Corporation’s database.
-   - Stores data in SQLite for offline access.
-3. **Meter Data Collection**
-   - Displays list of 5000+ transformers and allows selection for data entry.
-   - Supports automatic and manual meter reading entry.
-4. **Data Syncing**
-   - Synchronizes offline-collected data with the central database upon connectivity restoration.
-5. **Analytics & Reports**
-   - Real-time visualization of energy meter readings.
-   - Generating reports in multiple formats (CSV, PDF).
 
-## API Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/auth/login` | POST | Authenticate user and return token |
-| `/meters` | GET | Fetch list of DT meters |
-| `/meters/{id}` | GET | Retrieve data of a specific meter |
-| `/meters/update` | POST | Submit meter readings |
-| `/sync` | POST | Synchronize offline data with the server |
+OmniAMI employs a multi-tiered architecture:
 
-## Installation & Setup
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-repo/dt-meter-app.git
-   cd dt-meter-app
-   ```
-2. Install dependencies:
-   ```sh
-   flutter pub get
-   ```
-3. Run the application:
-   ```sh
-   flutter run
-   ```
+| Layer | Components | Description |
+|-------|------------|-------------|
+| Presentation Layer | WPF Application, MaterialDesign UI | Modern user interface built with WPF and Material Design |
+| Business Logic Layer | .NET Core Services | Core application logic, data processing, and validation |
+| Data Access Layer | Entity Framework, SQL Services | Database interaction and data persistence |
+| Integration Layer | REST APIs, MQTT Broker, DLMS/COSEM Protocols | Communication with meters and external systems |
+| Infrastructure | Cloud/On-premises Hybrid | Flexible deployment options to meet requirements |
 
-## Future Enhancements
-- **AI-powered anomaly detection** for irregular consumption patterns.
-- **Automated notifications & alerts** for abnormal energy usage.
-- **Integration with GIS systems** for advanced mapping and tracking.
-- **Multi-language support** to accommodate diverse users.
+## Communication Protocols
 
-## Contributors
-- **Bhutan Power Corporation (BPC)** - Project Sponsor
-- **[Your Name/Company]** - Development & Implementation
+| Protocol | Purpose | Benefits |
+|----------|---------|----------|
+| MQTT | Real-time meter data transmission | Low bandwidth usage, ideal for remote areas with limited connectivity |
+| RESTful API | System integration and data exchange | Standard interface for enterprise system integration |
+| DLMS/COSEM | Meter communication standard | Industry standard protocol for meter data collection |
+| TLS/SSL | Secure communications | End-to-end encryption of sensitive data |
 
-## License
-This project is proprietary software developed for Bhutan Power Corporation. Unauthorized distribution is prohibited.
+## Hardware Requirements
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 4-core processor | 8+ core processor |
+| RAM | 8 GB | 16+ GB |
+| Storage | 500 GB SSD | 1+ TB SSD |
+| Network | 10 Mbps dedicated | 100+ Mbps dedicated |
+| OS | Windows 10 Pro | Windows Server 2019+ |
+
+## Deployment Topology
+
+OmniAMI can be deployed in various configurations depending on the operational requirements:
+
+| Deployment Model | Description | Best For |
+|------------------|-------------|----------|
+| Centralized | Single installation at headquarters | Small-scale deployments |
+| Distributed | Regional installations with central sync | Large geographic areas |
+| High-Availability | Redundant installations with failover | Critical infrastructure |
+| Cloud-Hybrid | Cloud processing with on-premises data collection | Optimizing IT resources |
+
+## MQTT Implementation
+
+OmniAMI leverages MQTT (Message Queuing Telemetry Transport) protocol for efficient, reliable communication with meters across Bhutan's diverse geography:
+
+- **Publish/Subscribe Model**: Enables efficient one-to-many message distribution
+- **Quality of Service Levels**: Ensures message delivery even in unreliable network conditions
+- **Last Will and Testament**: Provides notification when meters disconnect unexpectedly
+- **Retained Messages**: Maintains state information for newly connected clients
+- **Lightweight Protocol**: Minimizes bandwidth usage in remote areas with limited connectivity
+- **Broker Architecture**: Centralized message handling with distributed client connections
+
+The MQTT implementation is particularly valuable for Bhutan's challenging terrain, where traditional communication methods may be unreliable. This protocol allows OmniAMI to maintain connections with meters in remote mountainous regions while minimizing data transmission costs.
+
+## Implementation Benefits
+
+- **Operational Efficiency**: Reduction in manual meter reading requirements by over 95%
+- **Data Accuracy**: Elimination of manual data entry errors
+- **Network Visibility**: Comprehensive view of the entire distribution network
+- **Outage Response**: Decreased outage response time from hours to minutes
+- **Load Management**: Better load balancing and capacity planning
+- **Loss Reduction**: Identification of technical and non-technical losses
+- **Asset Management**: Improved transformer lifecycle management
+- **Cost Savings**: Significant reduction in operational expenses
+
+## Integration Points
+
+AMI seamlessly integrates with various enterprise systems:
+
+- **Billing Systems**: For automatic consumption data transfer
+- **CRM Systems**: For customer communication regarding outages
+- **Asset Management**: For transformer lifecycle monitoring
+- **SCADA Systems**: For operational coordination
+- **GIS Platforms**: For spatial analysis and visualization
+- **Analytics Platforms**: For advanced data analysis and prediction
+
+## Security Features
+
+- End-to-end data encryption
+- Comprehensive audit logging
+- Multi-factor authentication support
+- Role-based access control
+- Automated security patch management
+- Compliance with IEC 62351 security standards
+- Secure MQTT implementation with TLS/SSL
+
+## Future Roadmap
+
+- **Advanced Analytics**: AI-powered predictive maintenance
+- **Mobile Applications**: Field technician support apps
+- **Demand Response**: Automated load management capabilities
+- **Renewable Integration**: Support for distributed generation monitoring
+- **IoT Expansion**: Support for additional sensor types
+- **Enhanced MQTT Features**: Expanded use of MQTT for broader IoT device integration
+
+## Support & Maintenance
+
+Comprehensive support and maintenance services are available, including:
+
+- 24/7 technical support
+- Regular software updates
+- Performance optimization
+- Custom feature development
+- Staff training and certification
+
+
+**Fuzzy Automation**  
 
 ---
-For further inquiries, please contact: **[Your Email/Support Contact]**.
 
+© 2025 Fuzzy Automation. All rights reserved.
