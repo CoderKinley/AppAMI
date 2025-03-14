@@ -15,12 +15,8 @@ The **DT Meter Data Collection App** is a professional application developed for
 ## Technologies Used
 | Technology  | Purpose  |
 |-------------|----------|
-| **Flutter** | Cross-platform mobile app development |
-| **Dart**    | Programming language for Flutter |
 | **SQLite**  | Local database storage for offline access |
 | **REST API** | Fetching real-time data from BPC’s central server |
-| **Provider/BLoC** | State management for efficient UI updates |
-| **Firebase** | Authentication & cloud storage |
 | **Google Maps API** | Visual representation of DT locations |
 
 ## System Architecture
