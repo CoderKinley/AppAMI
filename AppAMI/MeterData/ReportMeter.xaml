@@ -1,0 +1,968 @@
+﻿<UserControl x:Class="AppAMI.MeterData.ReportMeter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:syncfusion="http://schemas.syncfusion.com/wpf" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="560" d:DesignWidth="1070">
+    
+    <UserControl.Resources>
+        <!--<Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#2d2d30"/>
+            <Setter Property="BorderBrush"  Value="#202020 " />
+            <Setter Property="BorderThickness"  Value="0,0,0,2" />
+            <Setter Property="Foreground" Value="#cfcfcf" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"  />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Width"  Value="auto" />
+            <Setter Property="Padding"  Value="20 10" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#202020"/>
+                    <Setter Property="Foreground" Value="#cfcfcf"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>-->
+
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#2d2d30"/>
+            <Setter Property="BorderBrush"  Value="#202020 " />
+            <Setter Property="BorderThickness"  Value="0,0,0,2" />
+            <Setter Property="Foreground" Value="#cfcfcf" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"  />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Width"  Value="100" />
+            <Setter Property="Padding"  Value="5 5" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#202020"/>
+                    <Setter Property="Foreground" Value="#cfcfcf"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnMinNor">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="SlateGray"  />
+            <Setter Property="Width"  Value="30" />
+            <Setter Property="Height"   Value="30" />
+            <Setter Property="BorderThickness"    Value="0" />
+            <Setter Property="Margin"     Value="0,0,0,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="0"
+                         BorderThickness="0"
+                         Padding="0"
+                         BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center"   VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray"   />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid Background="#202020" >
+            <Grid  x:Name="GridLoadSurveyDaily"  Margin="15"  Background="#202020" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+
+
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" >
+                    <Rectangle   Fill="#2d2d30" RadiusY="5" RadiusX="5">
+                        <Rectangle.Effect>
+                            <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                        </Rectangle.Effect>
+                    </Rectangle>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Left" VerticalAlignment="Center" >
+                               
+
+                                <Label Content="Start Date" Foreground="#cfcfcf"  VerticalAlignment="Center" Margin="20 0 10 0"/>
+                                <DatePicker x:Name="dtPickerStart"   Width=" 100" Margin="10 0 0 0" Background="#2d2d30" BorderBrush="#00a5e3" Foreground="#00a5e3" 
+                                      SelectedDateChanged="dtPickerStart_SelectedDateChanged" />
+
+
+                                <Label Content="End Date" Foreground="#cfcfcf"  VerticalAlignment="Center" Margin="20 0 10 0"/>
+                                <DatePicker x:Name="dtPickerEnd"   Width=" 100" Margin="10 0 0 0" Background="#2d2d30" BorderBrush="#00a5e3" Foreground="#00a5e3" 
+                                       SelectedDateChanged="dtPickerEnd_SelectedDateChanged" />
+
+
+                            </StackPanel>
+
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
+
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                          
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                                <TextBox x:Name="txtDtId"  Text="{Binding Path=VmDtId}"  Visibility="Collapsed"  />
+                                <TextBox x:Name="txtUserRole"  Text="{Binding Path=VmUserRole}"    Visibility="Collapsed"/>
+                                
+                                <Button x:Name="btnExport"  Style="{StaticResource btnMinNor}" HorizontalAlignment="Right"  Width="50"     PreviewMouseRightButtonDown="btnExport_PreviewMouseRightButtonDown"  >
+                                    <materialDesign:PackIcon Kind="FileExportOutline"  Foreground="#00a5e3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
+
+
+                </Grid>
+
+                <Grid Grid.Row="1" >
+                    <!--<Rectangle   Fill="#202020" RadiusY="5" RadiusX="5">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                </Rectangle.Effect>
+            </Rectangle>-->
+                    <Grid Margin="0 10 0 0" Background="#2d2d30">
+
+                        <Rectangle  RadiusY="5" RadiusX="5" Fill="#2d2d30"   >
+                            <Rectangle.Effect>
+                                <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality"
+                                          ShadowDepth="1" Color="#2d2d30"/>
+                            </Rectangle.Effect>
+                        </Rectangle>
+
+
+                        <Grid Margin="15">
+
+                            <syncfusion:SfDataGrid Grid.Row="0" x:Name="reportsDgv"   
+                                               HorizontalAlignment="Center" 
+                                               AutoGenerateColumns="False"  
+                                               
+                                               AllowResizingHiddenColumns="True" 
+                                               AllowRowHoverHighlighting="True" 
+                                               
+                                               AllowEditing="False"
+                                               AllowDeleting="False"
+                                               AllowResizingColumns="True"
+                                               AllowSorting="True"
+                                               AllowFiltering="True"
+                                               AllowGrouping="True"
+                                               SelectionMode="Single"
+                                               NavigationMode="Row"
+                                               ShowGroupDropArea="False"  
+                                               ItemsSource="{Binding}"
+                                               Background="#2d2d30" 
+                                               Foreground="White"  
+                                               RowHeight="25"    
+                                               HeaderRowHeight="50" >
+
+                                <syncfusion:SfDataGrid.Resources>
+                                    <Style TargetType="syncfusion:GridHeaderCellControl">
+                                        <Setter Property="Background" Value="#2d2d30" />
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="FontSize" Value="11" />
+                                    </Style>
+
+                                </syncfusion:SfDataGrid.Resources>
+
+                                <syncfusion:SfDataGrid.Columns >
+
+                                    <syncfusion:GridTextColumn  MappingName="dt_id">
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Dt ID" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding dt_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+                                    
+                                    <syncfusion:GridTextColumn   MappingName="esd_name" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="ESD" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding esd_name}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="esd_name" >
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Feeder Name" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding feeder_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    
+                                    <syncfusion:GridTextColumn   MappingName="tripping_id" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Tripping ID" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding tripping_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="substation" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Substation" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding substation}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="tripping_point" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Tripping Point" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding tripping_point}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="substation_relay_indication" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Substation Relay Indication" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding substation_relay_indication}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="trip_date" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Trip Date" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding trip_date}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+
+
+                                    <syncfusion:GridTextColumn   MappingName="trip_time" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Trip Time" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding trip_time}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="restore_date" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Restore Date" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding restore_date}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="restore_time" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Restore Time" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding restore_time}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="duration" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Duration" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding duration}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="number_of_customers_affected" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="No. of Customers Affected" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding number_of_customers_affected}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+
+
+                                    <syncfusion:GridTextColumn   MappingName="type_of_tripping" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Type of Tripping" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding type_of_tripping}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="how_was_the_incident_identified" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="How was the Incident Identified" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding how_was_the_incident_identified}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="weather_condition" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Weather Condition" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding weather_condition}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="start_time_from_station" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Start Time from Station" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding start_time_from_station}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="end_journey_at_fault_location" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="End Journey at Fault Location" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding end_journey_at_fault_location}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+
+
+                                    <syncfusion:GridTextColumn   MappingName="mode_of_transport" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Mode of Transport" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding mode_of_transport}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="road_condition" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Road Condition" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding road_condition}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="maintenance_type" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Maintenance Type" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding maintenance_type}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="work_carried_out" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Work Carried Out" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding work_carried_out}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="name_of_equipment" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Name of Equipment" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding name_of_equipment}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+
+
+                                    <syncfusion:GridTextColumn   MappingName="causes_of_outage" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Causes of Outage" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding causes_of_outage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="impact_reason" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Impact Reason" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding impact_reason}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="elaborate_the_cause_of_outages" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Elaborate the Cause of Outages" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding elaborate_the_cause_of_outages}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="responsible_person" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Responsible person" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding responsible_person}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="target_completion_date" >
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Target completion date" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding target_completion_date}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+
+
+                                    <syncfusion:GridTextColumn   MappingName="status" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Status" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding status}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="repair_cost" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Repair cost" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding repair_cost}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="customer_compensation" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Customer Compensation" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding customer_compensation}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+                                    <syncfusion:GridTextColumn   MappingName="area_affected" >
+
+                                        <syncfusion:GridTextColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock TextWrapping="Wrap" Text="Area Affected" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.HeaderTemplate>
+
+
+                                        <syncfusion:GridTextColumn.CellStyle>
+                                            <Style TargetType="syncfusion:GridCell">
+                                                <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                            </Style>
+                                        </syncfusion:GridTextColumn.CellStyle>
+                                        <syncfusion:GridTextColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding area_affected}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </DataTemplate>
+                                        </syncfusion:GridTextColumn.CellTemplate>
+                                    </syncfusion:GridTextColumn>
+
+                                    
+                                    
+                                </syncfusion:SfDataGrid.Columns>
+                            </syncfusion:SfDataGrid>
+
+                        </Grid>
+
+
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+        <Grid x:Name="grdEmailAddress" Height="150" Width="350" Background="White"   >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+
+
+            <Grid Background="#202020">
+                <Label Content="Email Address" Foreground="White"   
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" />
+            </Grid>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" >
+
+                <StackPanel      Orientation="Horizontal"   >
+                    <Label Content="Enter Recipient Email Address" 
+                  HorizontalAlignment="Left"  
+                    Margin=" 20 0"/>
+
+
+                </StackPanel>
+
+                <TextBox   x:Name="txtEmailAdress" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" HorizontalContentAlignment="Center"   Margin="20 0" />
+
+
+
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"  >
+
+                <Button  x:Name="btnSendEmail"    Background="#00cdac" BorderThickness="0" Margin="20 0"  Click="btnSendEmail_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="EmailSend"           HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                        <Label Content="Send Email" Foreground="white" Margin="-5" />
+
+                    </StackPanel>
+                </Button>
+
+
+                <Button  x:Name="btnCancel"  Background="#ff5768" BorderThickness="0" Margin="20 0"  Click="btnCancel_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Cancel"            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                        <Label Content="Cancel" Foreground="white" Margin="-5" />
+
+                    </StackPanel>
+                </Button>
+
+
+            </StackPanel>
+        </Grid>
+
+        <Grid>
+            <syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"             
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </syncfusion:SfCircularProgressBar.AnimationEasing>
+            </syncfusion:SfCircularProgressBar>
+        </Grid>
+
+    </Grid>
+</UserControl>

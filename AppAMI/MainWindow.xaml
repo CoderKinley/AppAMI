@@ -1,0 +1,380 @@
+﻿<Window x:Class="AppAMI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="690" Width="1270" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+
+    <Window.Resources >
+        <Style TargetType="Button" x:Key="btnMenu">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Height"   Value="50" />
+            <Setter Property="Width"   Value="100" />
+            <Setter Property="BorderThickness"    Value="0" />
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="0"
+                         BorderThickness="0"
+                         Padding="0"
+                         BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center"   VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#202020"  />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btntyle">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="SlateGray"  />
+
+            <Setter Property="BorderThickness"    Value="0" />
+            <Setter Property="Width"      Value="40" />
+            <Setter Property="Height"       Value="25" />
+            <Setter Property="Margin"        Value="0 0 5 0" />
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="0"
+                         BorderThickness="0"
+                         Padding="0"
+                         BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center"     VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray"    />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnClose">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="SlateGray"   />
+            <Setter Property="Width"  Value="30" />
+            <Setter Property="Height"   Value="30" />
+            <Setter Property="BorderThickness"    Value="0" />
+            <Setter Property="Margin"     Value="0,0,0,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="0"
+                         BorderThickness="0"
+                         Padding="0"
+                         BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center"   VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Red"  />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="Button" x:Key="btnMinNor">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="SlateGray"  />
+            <Setter Property="Width"  Value="30" />
+            <Setter Property="Height"   Value="30" />
+            <Setter Property="BorderThickness"    Value="0" />
+            <Setter Property="Margin"     Value="0,0,0,5" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                         CornerRadius="0"
+                         BorderThickness="0"
+                         Padding="0"
+                         BorderBrush="#000">
+                            <ContentPresenter HorizontalAlignment="Center"   VerticalAlignment="Center">
+
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Gray"   />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0"  >
+
+            <Grid.RowDefinitions >
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Background="#202020"  >
+                <Rectangle  RadiusY="0" RadiusX="0"  />
+
+                <Grid  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    
+                    
+                   
+
+
+                    <StackPanel Grid.Column="1"  Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Center" >
+                        <Button x:Name="btnUserAccount" Width="22" Height="22" Background="#0071AB" Margin="0 0 30 0"
+                                PreviewMouseRightButtonDown="btnUserAccount_PreviewMouseRightButtonDown">
+                            <Label x:Name="lblUserInitials" FontWeight="ExtraLight"  Content="KJ" FontSize="9" Foreground="#cfcfcf"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Grid>
+                                        <Ellipse x:Name="ellipse" Fill="{TemplateBinding Background}" />
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="ellipse" Property="Stroke" Value="#2d2d30" />
+                                            <Setter TargetName="ellipse" Property="StrokeThickness" Value="1" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+
+
+                        </Button>
+
+                        <Button x:Name="btnMinimize"   Click="btnMinimize_Click" Style="{StaticResource btnMinNor  }" >
+                            <materialDesign:PackIcon Kind="WindowMinimize"   VerticalAlignment="Center"   />
+                        </Button>
+
+                        <Button   x:Name="btnMax"    Click="btnMax_Click" Style="{StaticResource btnMinNor  }" >
+                            <StackPanel>
+                                <materialDesign:PackIcon x:Name="IcoMaximize" Kind="WindowMaximize"  VerticalAlignment="Center" Visibility="Collapsed"/>
+                                <materialDesign:PackIcon x:Name="IcoNormalize" Kind="WindowRestore"   VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button   x:Name="btnClose"  Click="btnClose_Click" Style="{StaticResource btnClose  }">
+                            <materialDesign:PackIcon Kind="Close"    VerticalAlignment="Center"  />
+                        </Button>
+                    </StackPanel>
+
+                    <Grid Background="#202020"   MouseDown="grdTop1_MouseDown" >
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  >
+                            <Image Source="D:\AppAMI\AppAMI\Assets\logoMain.PNG" HorizontalAlignment="Left"  Margin="15 5"  />
+
+                            <Label  Grid.Column="1" Content="omni AMI"  HorizontalAlignment="Stretch"     HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Bottom"   FontWeight="Bold"   Foreground="White"   /> 
+                        </StackPanel>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Background="#2d2d30" x:Name="grdMenuBar" >
+                   
+                    
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"   Margin="15,0,0,0">
+
+                        <Button x:Name="btnUser" Uid="0"  Style="{StaticResource btnMenu  }"   Click="Button_Click"  >
+                            <StackPanel >
+                                <Label Content="User"   Foreground="#cfcfcf" HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="User"   Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"    />
+
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnMeterConfiguration" Uid="1" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Configuration"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="Settings"  Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnMeterData" Uid="2"  Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Meter Data"  Foreground="#cfcfcf"  HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="Table"    Foreground="#00a5e3"  HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnInstant" Uid="3" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Instant Para"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="ClockTimeEightOutline"         Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button x:Name="btnBilling" Uid="4" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Instant HIS"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="ChartLine"     Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnLoadSurvey" Uid="5" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Load Profile 0"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="ChartLine"    Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button x:Name="btnLoadSurvey1" Uid="6" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Load Profile 1"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="ChartLine"    Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+
+                        <Button x:Name="btnEvents" Uid="7" Style="{StaticResource btnMenu  }" Click="Button_Click"  >
+                            <StackPanel >
+                                <Label Content="Events"  Foreground="#cfcfcf"  HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="Event"      Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnReport" Uid="8" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="POI"  Foreground="#cfcfcf"  HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="FileReport"   Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                        <Button x:Name="btnReliability" Uid="9" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="Reliability Indices"  Foreground="#cfcfcf"  HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="FileReport"      Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+                        
+                        <!--<Button x:Name="btnNMS" Uid="10"  Style="{StaticResource btnMenu  }" Click="Button_Click"  Visibility="Collapsed" >
+                            <StackPanel >
+                                <Label Content="NMS"  Foreground="#cfcfcf"  HorizontalAlignment="Center"    />
+                                <materialDesign:PackIcon Kind="Graph"  Foreground="#00a5e3"  HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>-->
+
+                        <Button x:Name="btnMriMonitoring" Uid="10"  Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="MRI Monitoring"  Foreground="#cfcfcf"  HorizontalAlignment="Center"    />
+                                <materialDesign:PackIcon Kind="Graph"  Foreground="#00a5e3"  HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+                        
+                        <Button x:Name="btnGIS" Uid="11" Style="{StaticResource btnMenu  }" Click="Button_Click" >
+                            <StackPanel >
+                                <Label Content="GIS"  Foreground="#cfcfcf"  HorizontalAlignment="Center"  />
+                                <materialDesign:PackIcon Kind="MapMarker"  Foreground="#00a5e3"  HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+                       
+                        
+                        
+                       
+
+                       
+
+                        <Button x:Name="btnRoot" Uid="10" Style="{StaticResource btnMenu  }" Click="btnRoot_Click" >
+                            <StackPanel >
+                                <Label Content="Root"  Foreground="#cfcfcf"  HorizontalAlignment="Center"   />
+                                <materialDesign:PackIcon Kind="AccountAdd"     Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </Button>
+
+
+
+                    </StackPanel>
+
+                   
+                    <Grid x:Name="GridCursor" Width="100" Margin="15,0,0,0" Height="3" Background="#FF2196F3"  VerticalAlignment="Bottom"  HorizontalAlignment="Left"   />
+
+
+                </Grid>
+
+                <Grid Grid.Row="1" Background="#00a5e3"/>
+
+            </Grid>
+
+
+
+        </Grid>
+
+
+        <Grid Grid.Row="1" Name="GridAmrView"  Background="Black"   >
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="D:\AppAMI\AppAMI\Assets\logoMain.PNG" 
+                       Height=" 200"/>
+
+                <Label Content="Fuzzy Automation"  FontSize="50" 
+                       Foreground="#cfcfcf" HorizontalAlignment="Center" 
+                       Margin="10"/>
+                <Label Content="Advanced Metering Insfrastructure for Distribution Transformers"  
+                       FontSize="20" HorizontalAlignment="Center"   
+                       Foreground="#cfcfcf" Margin="10" />
+
+
+                <!--<Image x:Name="imgPic" 
+                       Height=" 200"/>-->
+                
+
+
+            </StackPanel>
+        </Grid>
+
+
+    </Grid>
+</Window>

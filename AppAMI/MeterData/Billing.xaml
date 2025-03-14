@@ -1,0 +1,896 @@
+﻿<UserControl x:Class="AppAMI.MeterData.Billing"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppAMI.MeterData" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources >
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#2d2d30"/>
+            <Setter Property="BorderBrush"  Value="#202020 " />
+            <Setter Property="BorderThickness"  Value="1,1,1,1" />
+            <Setter Property="Foreground" Value="#cfcfcf" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"  />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Width"  Value="150" />
+            <Setter Property="Padding"  Value="5 5" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#202020"/>
+                    <Setter Property="Foreground" Value="#cfcfcf"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+
+
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid Background="#202020" Margin="15" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"  Background="#2d2d30" >
+                <Rectangle   Fill="#2d2d30" RadiusY="5" RadiusX="5">
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <StackPanel  Orientation="Horizontal"  VerticalAlignment="Center" HorizontalAlignment="Left"  >
+                            <Button x:Name="btnBack" Background="Transparent" BorderThickness=" 0" Click="btnBack_Click" Margin="-10 0 10 0">
+                                <materialDesign:PackIcon Kind="ArrowBackCircle"    Height="20" Width="20"  Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+
+                            </Button>
+                            <Label Content="Start Date" Foreground="#cfcfcf"  VerticalAlignment="Center" Margin="20 0 10 0"/>
+
+                            <DatePicker x:Name="dtStartDate"  Width=" 100" Margin="10 0 10 0"  VerticalAlignment="Center"  BorderBrush="#00a5e3" Foreground="#00a5e3" HorizontalAlignment="Left" SelectedDateChanged="dtStartDate_SelectedDateChanged"  />
+
+                            <Label Content="End Date" Foreground="#cfcfcf"  VerticalAlignment="Center" Margin="20 0 10 0"/>
+
+                            <DatePicker  Width=" 100" Margin="10 0 0 0"   BorderBrush="#00a5e3" Foreground="#00a5e3"  />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <!--<Button x:Name="btnReturn" HorizontalAlignment="Left" Content="back" Click="btnReturn_Click" />-->
+                        <Label  Content="Billing Data" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"  />
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <TextBox x:Name="txtDtId" Text="{Binding Path=DtId}" Foreground="Red"   Visibility="Collapsed"              />
+
+                    </Grid>
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Row="1" >
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0"  >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <CheckBox   x:Name="cbParent" IsThreeState="False"   Content="Select All"
+                             Checked="cbParent_Checked" Unchecked="cbParent_Unchecked"   Foreground="#cfcfcf" >
+                                <CheckBox.Resources>
+                                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                </CheckBox.Resources>
+                            </CheckBox>
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Label Content="Selected Parameters" x:Name="lblSelectedParameters" Foreground="#cfcfcf" VerticalAlignment="Center" Margin=" 10 0"/>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Label Content="Data" Foreground="#cfcfcf" VerticalAlignment="Center"  Margin=" 10 0"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Margin=" 0 0">
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0" >
+
+                            <Rectangle  Margin=" 0 0 10 0" RadiusY="5" RadiusX="5" Fill="#2d2d30">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden" >
+                                <StackPanel>
+
+                                    <CheckBox Margin="15,5" Name="cbBillingDate" Height="25" Content="Billing date" Foreground="#cfcfcf" Checked="cbBillingDate_Checked" Unchecked="cbBillingDate_Unchecked"    >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+                                    <CheckBox Margin="15,5"  Height="25" Name="cbImportActiveEnergy" Content="Import Active Energy " Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveEnergy_Checked" Unchecked="cbImportActiveEnergy_Unchecked"  >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5"  Height="25" Name="cbImportActiveEnergyHis1"  Content="Import Active Energy (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveEnergyHis1_Checked" Unchecked="cbImportActiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbImportActiveEnergyHis2" Content="Import Active Energy (History 2)" Foreground="#cfcfcf"   
+                                              Checked="cbImportActiveEnergyHis2_Checked" Unchecked="cbImportActiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5"  Height="25" Name="cbImportActiveEnergyHis3" Content="Import Active Energy (History 3)" Foreground="#cfcfcf" 
+                                              Checked="cbImportActiveEnergyHis3_Checked" Unchecked="cbImportActiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbImportActiveEnergyRate1" Content="Import Active Energy - Rate 1" Foreground="#cfcfcf" 
+                                              Checked="cbImportActiveEnergyRate1_Checked" Unchecked="cbImportActiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5"   Height="25" Name="cbImportActiveEnergyRate1His1" Content="Import Active Energy - Rate 1 (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbImportActiveEnergyRate1His1_Checked" Unchecked="cbImportActiveEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5"   Height="25" Name="cbImportActiveEnergyRate1His2" Content="Import Active Energy - Rate 1 (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveEnergyRate1His2_Checked" Unchecked="cbImportActiveEnergyRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbImportActiveEnergyRate1His3" Content="Import Active Energy - Rate 1 (History 3)" Foreground="#cfcfcf" 
+                                              Checked="cbImportActiveEnergyRate1His3_Checked" Unchecked="cbImportActiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+
+                                    <CheckBox Margin="15,5"  Height="25" Name="cbImportReactiveEnergy"  Content="Import Reactive Energy " Foreground="#cfcfcf"  
+                                              Checked="cbImportReactiveEnergy_Checked" Unchecked="cbImportReactiveEnergy_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbImportReactiveEnergyHis1" Content="Import Reactive Energy (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbImportReactiveEnergyHis1_Checked" Unchecked="cbImportReactiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyHis2" Content="Import Reactive Energy (History 2)" Foreground="#cfcfcf" 
+                                              Checked="cbImportReactiveEnergyHis2_Checked" Unchecked="cbImportReactiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyHis3" Content="Import Reactive Energy (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbImportReactiveEnergyHis3_Checked" Unchecked="cbImportReactiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyRate" Content="Import Reactive Energy - Rate 1" Foreground="#cfcfcf"   
+                                              Checked="cbImportReactiveEnergyRate_Checked" Unchecked="cbImportReactiveEnergyRate_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyRateHis1" Content="Import Reactive Energy - Rate 1 (History 1)" Foreground="#cfcfcf"   
+                                              Checked="cbImportReactiveEnergyRateHis1_Checked" Unchecked="cbImportReactiveEnergyRateHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyRateHis2" Content="Import Reactive Energy - Rate 1 (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbImportReactiveEnergyRateHis2_Checked" Unchecked="cbImportReactiveEnergyRateHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportReactiveEnergyRateHis3" Content="Import Reactive Energy - Rate 1 (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbImportReactiveEnergyRateHis3_Checked" Unchecked="cbImportReactiveEnergyRateHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergy" Content="Total Active Energy " Foreground="#cfcfcf"  
+                                              Checked="cbTotActiveEnergy_Checked" Unchecked="cbTotActiveEnergy_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyHis1" Content="Total Active Energy (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbTotActiveEnergyHis1_Checked" Unchecked="cbTotActiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyHis2" Content="Total Active Energy (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbTotActiveEnergyHis2_Checked" Unchecked="cbTotActiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyHis3" Content="Total Active Energy (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbTotActiveEnergyHis3_Checked" Unchecked="cbTotActiveEnergyHis3_Unchecked"  >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyRate1" Content="Total Active Energy - Rate 1" Foreground="#cfcfcf" 
+                                              Checked="cbTotActiveEnergyRate1_Checked" Unchecked="cbTotActiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyRate1His1" Content="Total Active Energy - Rate 1 (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbTotActiveEnergyRate1His1_Checked" Unchecked="cbTotActiveEnergyRate1His1_Unchecked"  >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyRate1His2"  Content="Total Active Energy - Rate 1 (History 2)" Foreground="#cfcfcf"
+                                             Checked="cbTotActiveEnergyRate1His2_Checked" Unchecked="cbTotActiveEnergyRate1His2_Unchecked"  >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotActiveEnergyRate1His3"  Content="Total Active Energy - Rate 1 (History 3)" Foreground="#cfcfcf"  Checked="cbTotActiveEnergyRate1His3_Checked" Unchecked="cbTotActiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotReactiveEnergy" Content="Total Reactive Energy " Foreground="#cfcfcf"  
+                                              Checked="cbTotReactiveEnergy_Checked" Unchecked="cbTotReactiveEnergy_Unchecked"   >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotReactiveEnergyHis1" Content="Total Reactive Energy (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbTotReactiveEnergyHis1_Checked" Unchecked="cbTotReactiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotReactiveEnergyHis2" Content="Total Reactive Energy (History 2)" Foreground="#cfcfcf"   
+                                              Checked="cbTotReactiveEnergyHis2_Checked" Unchecked="cbTotReactiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotReactiveEnergyHis3" Content="Total Reactive Energy (History 3)" Foreground="#cfcfcf"   
+                                              Checked="cbTotReactiveEnergyHis3_Checked" Unchecked="cbTotReactiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbTotReactiveEnergyRate1" Content="Total Reactive Energy - Rate 1" Foreground="#cfcfcf"  
+                                              Checked="cbTotReactiveEnergyRate1_Checked" Unchecked="cbTotReactiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbTotReactiveEnergyRate1His1" Content="Total Reactive Energy - Rate 1 (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbTotReactiveEnergyRate1His1_Checked" Unchecked="cbTotReactiveEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbTotReactiveEnergyRate1His2" Content="Total Reactive Energy - Rate 1 (History 2)" Foreground="#cfcfcf"   
+                                              Checked="cbTotReactiveEnergyRate1His2_Checked" Unchecked="cbTotReactiveEnergyRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25"  Name="cbTotReactiveEnergyRate1His3" Content="Total Reactive Energy - Rate 1 (History 3)" Foreground="#cfcfcf"   
+                                              Checked="cbTotReactiveEnergyRate1His3_Checked" Unchecked="cbTotReactiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergy" Content="Total Apparent Energy " Foreground="#cfcfcf"   
+                                              Checked="cbTotalApprentEnergy_Checked" Unchecked="cbTotalApprentEnergy_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyHis1" Content="Total Apparent Energy (History 1)" Foreground="#cfcfcf"   
+                                              Checked="cbTotalApprentEnergyHis1_Checked" Unchecked="cbTotalApprentEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyHis2" Content="Total Apparent Energy (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbTotalApprentEnergyHis2_Checked" Unchecked="cbTotalApprentEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyHis3" Content="Total Apparent Energy (History 3)" Foreground="#cfcfcf" 
+                                              Checked="cbTotalApprentEnergyHis3_Checked" Unchecked="cbTotalApprentEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyRate1" Content="Total Apparent Energy - Rate 1" Foreground="#cfcfcf"  
+                                              Checked="cbTotalApprentEnergyRate1_Checked" Unchecked="cbTotalApprentEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyRate1His1" Content="Total Apparent Energy - Rate 1 (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbTotalApprentEnergyRate1His1_Checked" Unchecked="cbTotalApprentEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5"  Height="25" Name="cbTotalApprentEnergyRate1His2" Content="Total Apparent Energy - Rate 1 (History 2)" Foreground="#cfcfcf" 
+                                              Checked="cbTotalApprentEnergyRate1His2_Checked" Unchecked="cbTotalApprentEnergyRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbTotalApprentEnergyRate1His3" Content="Total Apparent Energy - Rate 1 (History 3)" Foreground="#cfcfcf" 
+                                              Checked="cbTotalApprentEnergyRate1His3_Checked" Unchecked="cbTotalApprentEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+                                    
+                                    
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergy" Content="Phase A Import Active Energy " Foreground="#cfcfcf"   
+                                              Checked="cbPhaseAImportActiveEnergy_Checked" Unchecked="cbPhaseAImportActiveEnergy_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyHis1" Content="Phase A Import Active Energy (History 1)" Foreground="#cfcfcf" 
+                                              Checked="cbPhaseAImportActiveEnergyHis1_Checked" Unchecked="cbPhaseAImportActiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyHis2" Content="Phase A Import Active Energy (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseAImportActiveEnergyHis2_Checked" Unchecked="cbPhaseAImportActiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyHis3" Content="Phase A Import Active Energy (History 3)" Foreground="#cfcfcf"   
+                                              Checked="cbPhaseAImportActiveEnergyHis3_Checked" Unchecked="cbPhaseAImportActiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyRate1" Content="Phase A Import Active Energy - Rate 1" Foreground="#cfcfcf" 
+                                              Checked="cbPhaseAImportActiveEnergyRate1_Checked" Unchecked="cbPhaseAImportActiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyRate1His1" Content="Phase A Import Active Energy - Rate 1 (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseAImportActiveEnergyRate1His1_Checked" Unchecked="cbPhaseAImportActiveEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyRate1His2"  Content="Phase A Import Active Energy - Rate 1 (History 2)" Foreground="#cfcfcf" 
+                                              Checked="cbPhaseAImportActiveEnergyRate1His2_Checked" Unchecked="cbPhaseAImportActiveEnergyRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseAImportActiveEnergyRate1His3"  Content="Phase A Import Active Energy - Rate 1 (History 3)" Foreground="#cfcfcf" 
+                                              Checked="cbPhaseAImportActiveEnergyRate1His3_Checked" Unchecked="cbPhaseAImportActiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergy" Content="Phase B Import Active Energy " Foreground="#cfcfcf" 
+                                              Checked="cbPhaseBImportActiveEnergy_Checked" Unchecked="cbPhaseBImportActiveEnergy_Unchecked"   >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyHis1" Content="Phase B Import Active Energy (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseBImportActiveEnergyHis1_Checked" Unchecked="cbPhaseBImportActiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyHis2" Content="Phase B Import Active Energy (History 2)" Foreground="#cfcfcf" 
+                                              Checked="cbPhaseBImportActiveEnergyHis2_Checked" Unchecked="cbPhaseBImportActiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyHis3" Content="Phase B Import Active Energy (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseBImportActiveEnergyHis3_Checked" Unchecked="cbPhaseBImportActiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyRate1" Content="Phase B Import Active Energy - Rate 1" Foreground="#cfcfcf"   
+                                              Checked="cbPhaseBImportActiveEnergyRate1_Checked" Unchecked="cbPhaseBImportActiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyRate1His1" Content="Phase B Import Active Energy - Rate 1 (History 1)" Foreground="#cfcfcf"   
+                                              Checked="cbPhaseBImportActiveEnergyRate1His1_Checked" Unchecked="cbPhaseBImportActiveEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyRate1His2" Content="Phase B Import Active Energy - Rate 1 (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseBImportActiveEnergyRate1His2_Checked" Unchecked="cbPhaseBImportActiveEnergyRate1His2_Unchecked"  >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseBImportActiveEnergyRate1His3" Content="Phase B Import Active Energy - Rate 1 (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseBImportActiveEnergyRate1His3_Checked" Unchecked="cbPhaseBImportActiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergy" Content="Phase C Import Active Energy " Foreground="#cfcfcf"   
+                                              Checked="cbPhaseCImportActiveEnergy_Checked" Unchecked="cbPhaseCImportActiveEnergy_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyHis1" Content="Phase C Import Active Energy (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseCImportActiveEnergyHis1_Checked" Unchecked="cbPhaseCImportActiveEnergyHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyHis2" Content="Phase C Import Active Energy (History 2)" Foreground="#cfcfcf"
+                                              Checked="cbPhaseCImportActiveEnergyHis2_Checked" Unchecked="cbPhaseCImportActiveEnergyHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyHis3" Content="Phase C Import Active Energy (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseCImportActiveEnergyHis3_Checked" Unchecked="cbPhaseCImportActiveEnergyHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyRate1" Content="Phase C Import Active Energy - Rate 1" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseCImportActiveEnergyRate1_Checked" Unchecked="cbPhaseCImportActiveEnergyRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyRate1His1" Content="Phase C Import Active Energy - Rate 1 (History 1)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseCImportActiveEnergyRate1His1_Checked" Unchecked="cbPhaseCImportActiveEnergyRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyRate1His2" Content="Phase C Import Active Energy - Rate 1 (History 2)" Foreground="#cfcfcf"
+                                              Checked="cbPhaseCImportActiveEnergyRate1His2_Checked" Unchecked="cbPhaseCImportActiveEnergyRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbPhaseCImportActiveEnergyRate1His3" Content="Phase C Import Active Energy - Rate 1 (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbPhaseCImportActiveEnergyRate1His3_Checked" Unchecked="cbPhaseCImportActiveEnergyRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemand" Content="Import Active Maximum Demand" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveMaxDemand_Checked" Unchecked="cbImportActiveMaxDemand_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandHis1" Content="Import Active Maximum Demand (History 1)" Foreground="#cfcfcf"   
+                                              Checked="cbImportActiveMaxDemandHis1_Checked" Unchecked="cbImportActiveMaxDemandHis1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandHis2" Content="Import Active Maximum Demand (History 2)" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveMaxDemandHis2_Checked" Unchecked="cbImportActiveMaxDemandHis2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandHis3" Content="Import Active Maximum Demand (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveMaxDemandHis3_Checked" Unchecked="cbImportActiveMaxDemandHis3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandRate1" Content="Import Active Maximum Demand - Rate 1" Foreground="#cfcfcf" 
+                                              Checked="cbImportActiveMaxDemandRate1_Checked" Unchecked="cbImportActiveMaxDemandRate1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandRate1His1" Content="Import Active Maximum Demand - Rate 1 (History 1)" Foreground="#cfcfcf"   
+                                              Checked="cbImportActiveMaxDemandRate1His1_Checked" Unchecked="cbImportActiveMaxDemandRate1His1_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandRate1His2" Content="Import Active Maximum Demand - Rate 1 (History 2)" Foreground="#cfcfcf"   
+                                              Checked="cbImportActiveMaxDemandRate1His2_Checked" Unchecked="cbImportActiveMaxDemandRate1His2_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+                                    <CheckBox Margin="15,5" Height="25" Name="cbImportActiveMaxDemandRate1His3" Content="Import Active Maximum Demand - Rate 1 (History 3)" Foreground="#cfcfcf"  
+                                              Checked="cbImportActiveMaxDemandRate1His3_Checked" Unchecked="cbImportActiveMaxDemandRate1His3_Unchecked" >
+                                        <CheckBox.Resources>
+                                            <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00cdac"/>
+                                        </CheckBox.Resources>
+                                    </CheckBox>
+
+
+
+
+                                </StackPanel>
+                            </ScrollViewer>
+
+                        </Grid>
+
+                        <Grid Grid.Column="1">
+                            <Rectangle  Margin=" 0 0 10 0"   RadiusY="5" RadiusX="5" Fill="#2d2d30">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="scrollVSelectrdPara"  PreviewMouseWheel="scrollVSelectrdPara_PreviewMouseWheel" >
+                                <ListBox x:Name="lvSelectedPara" Foreground="#cfcfcf" Margin=" 10 0" >
+
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Height" Value="25" />
+                                            <Setter Property="Margin"  Value="15 5" />
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </ScrollViewer>
+
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <Rectangle  Grid.Row="0" Grid.Column="1"  RadiusY="5" RadiusX="5" Fill="#2d2d30">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <ScrollViewer   x:Name="scrollVData" VerticalScrollBarVisibility="Hidden"  >
+                                <StackPanel x:Name="stkBillingData">
+
+                                    <Label x:Name="lblBillingDate" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5"  HorizontalAlignment="Center" HorizontalContentAlignment="Center"   Visibility="Collapsed" />
+                                 
+                                    
+                                    <Label x:Name="lblImportActiveEnergy" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyHis1" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyHis2" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyHis3" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyRate1" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyRate1His1" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyRate1His2" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label x:Name="lblImportActiveEnergyRate1His3" Content="0" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblImportReactiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed"/>
+                                    <Label Content="0" Name="lblImportReactiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyRate" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyRateHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyRateHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportReactiveEnergyRateHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblTotActiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotActiveEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+
+                                    <Label Content="0" Name="lblTotReactiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotReactiveEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblTotalApparentEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblTotalApparentEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseAImportActiveEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseBImportActiveEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergy" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblPhaseCImportActiveEnergyRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+
+                                    <Label Content="0" Name="lblImportActiveMaxDemand" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandHis1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandHis2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandHis3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandRate1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandRate1His1" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandRate1His2" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+                                    <Label Content="0" Name="lblImportActiveMaxDemandRate1His3" Foreground="#cfcfcf" Height="25" Margin="25 5" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Visibility="Collapsed" />
+
+                                </StackPanel>
+
+
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Button Grid.Column="1" x:Name="btnStartPolling" Content="Read Data" Background="#00a5e3" Click="btnStartPolling_Click"  />
+            </Grid>
+        </Grid>
+
+
+    </Grid>
+</UserControl>

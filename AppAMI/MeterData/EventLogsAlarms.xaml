@@ -1,0 +1,307 @@
+﻿<UserControl x:Class="AppAMI.MeterData.EventLogsAlarms"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppAMI.MeterData" xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Grid;assembly=Syncfusion.SfGrid.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="1070">
+
+    <UserControl.Resources>
+        <Style x:Key="filterControlStyle" TargetType="syncfusion:GridFilterControl">
+            <Setter Property="FilterMode" Value="Both"  />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="#202020" Margin="15"  >
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition  Height="30"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" >
+                <Rectangle   Fill="#2d2d30" RadiusY="5" RadiusX="5">
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#2d2d30"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+                <Grid>
+                    <Label Content="Alarms" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+
+                    <TextBox x:Name="txtDtId" Text="{Binding Path=DtId}" Foreground="Red"  HorizontalAlignment="Right"   Visibility="Visible"             />
+
+                </Grid>
+
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0"  >
+
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Label Content="Deviations" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="0 0 7.5 0">
+                            <Rectangle  RadiusY="5" RadiusX="5" Fill="#2d2d30"   >
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality"
+                                          ShadowDepth="1" Color="#2d2d30"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <Grid Margin="15">
+                                <syncfusion:SfDataGrid Grid.Row="0" x:Name="datagridUser"   
+                                   AutoGenerateColumns="False"
+                        AllowEditing="False"
+                        AllowDeleting="False"
+                        AllowResizingColumns="True"
+                       
+                        AllowSorting="True"
+                        AllowFiltering="True"
+                        AllowGrouping="True"
+                        SelectionMode="Single"
+                        NavigationMode="Row"
+                        ShowGroupDropArea="False"
+                        
+                        ItemsSource="{Binding}"
+                                 
+                                   Background="#2d2d30" Foreground="White"  
+                                        RowHeight="35"    
+                                           HeaderRowHeight="35"
+                                   >
+                                    <syncfusion:SfDataGrid.Resources>
+                                        <Style TargetType="syncfusion:GridHeaderCellControl">
+                                            <Setter Property="Background" Value="#2d2d30" />
+                                            <Setter Property="Foreground" Value="White" />
+                                            <Setter Property="FontSize" Value="11" />
+
+                                        </Style>
+
+
+                                    </syncfusion:SfDataGrid.Resources>
+
+                                    <syncfusion:SfDataGrid.Columns >
+
+
+                                        <syncfusion:GridTextColumn HeaderText="Date"  MappingName="employee_id" >
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding user_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                        <syncfusion:GridTextColumn HeaderText="Time"  MappingName="employee_id" >
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding employee_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                        <syncfusion:GridTextColumn HeaderText="Alarm" MappingName="user_name">
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding user_name}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+
+
+                                        <syncfusion:GridTextColumn HeaderText="Status" MappingName="oranisation">
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding oranisation}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                       
+
+                                    </syncfusion:SfDataGrid.Columns>
+                                </syncfusion:SfDataGrid>
+
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+
+
+
+
+                </Grid>
+
+
+                <Grid Grid.Column="1"  >
+
+
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition/>
+
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Label Content="Communication" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+                        </Grid>
+
+                        <Grid Grid.Row="1" Margin="7.5 0 0 0">
+                            <Rectangle  RadiusY="5" RadiusX="5" Fill="#2d2d30"   >
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality"
+                                          ShadowDepth="1" Color="#2d2d30"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+
+                            <Grid Margin="15">
+                                <syncfusion:SfDataGrid Grid.Row="0" x:Name="datagridUser1"   
+                                   AutoGenerateColumns="False"
+                        AllowEditing="False"
+                        AllowDeleting="False"
+                        AllowResizingColumns="True"
+                       
+                        AllowSorting="True"
+                        AllowFiltering="True"
+                        AllowGrouping="True"
+                        SelectionMode="Single"
+                        NavigationMode="Row"
+                        ShowGroupDropArea="False"
+                        
+                        ItemsSource="{Binding}"
+                                 
+                                   Background="#2d2d30" Foreground="White"  
+                                        RowHeight="35"    
+                                           HeaderRowHeight="35"
+                                   >
+                                    <syncfusion:SfDataGrid.Resources>
+                                        <Style TargetType="syncfusion:GridHeaderCellControl">
+                                            <Setter Property="Background" Value="#2d2d30" />
+                                            <Setter Property="Foreground" Value="White" />
+                                            <Setter Property="FontSize" Value="11" />
+
+                                        </Style>
+
+
+                                    </syncfusion:SfDataGrid.Resources>
+
+                                    <syncfusion:SfDataGrid.Columns >
+
+
+                                        <syncfusion:GridTextColumn HeaderText="Date"  MappingName="employee_id" >
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding user_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                        <syncfusion:GridTextColumn HeaderText="Time"  MappingName="employee_id" >
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding employee_id}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                        <syncfusion:GridTextColumn HeaderText="Alarm" MappingName="user_name">
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding user_name}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+
+
+                                        <syncfusion:GridTextColumn HeaderText="Status" MappingName="oranisation">
+                                            <syncfusion:GridTextColumn.CellStyle>
+                                                <Style TargetType="syncfusion:GridCell">
+                                                    <Setter Property="HorizontalAlignment" Value="Stretch"  />
+                                                    <Setter Property="VerticalAlignment"  Value="Stretch"   />
+                                                </Style>
+                                            </syncfusion:GridTextColumn.CellStyle>
+                                            <syncfusion:GridTextColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Text="{Binding oranisation}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </DataTemplate>
+                                            </syncfusion:GridTextColumn.CellTemplate>
+                                        </syncfusion:GridTextColumn>
+
+                                    </syncfusion:SfDataGrid.Columns>
+                                </syncfusion:SfDataGrid>
+
+                            </Grid>
+
+                        </Grid>
+                    </Grid>
+
+
+
+
+                </Grid>
+
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

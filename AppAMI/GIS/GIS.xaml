@@ -1,0 +1,234 @@
+﻿<UserControl x:Class="AppAMI.GIS.GIS"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" xmlns:notification="clr-namespace:Syncfusion.Windows.Controls.Notification;assembly=Syncfusion.Tools.Wpf" xmlns:syncfusion="clr-namespace:Syncfusion.UI.Xaml.Grid;assembly=Syncfusion.SfGrid.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1270">
+  
+    
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Background="#2d2d30">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                 
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Column="0" Content="DT Id :" Foreground="#cfcfcf" VerticalAlignment="Center" HorizontalAlignment="Right"  />
+
+                        <TextBox x:Name="txtDtIdSearch" Grid.Column="1" Foreground="White"   VerticalAlignment="Center"   TextAlignment="Center"  
+                         GotFocus="txtDtIdSearch_GotFocus" KeyDown="txtDtIdSearch_KeyDown"  BorderThickness="0 0 0  1" />
+
+                        <Button x:Name="btnSerachDt" Grid.Column="2" Background="Transparent" BorderThickness="0"  Click="btnSerachDt_Click">
+                            <materialDesign:PackIcon Kind="Search"    HorizontalAlignment="Center"  Foreground="#00a5e3"  />
+                        </Button>
+                    </Grid>
+
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" >
+
+                        <CheckBox Margin="15,5" x:Name="cbFeederView"   Content="Feeder View" Height="25" Foreground="#cfcfcf"  
+                                         Checked="cbFeederView_Checked"  >
+                            <CheckBox.Resources>
+                                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00a5e3"/>
+                            </CheckBox.Resources>
+                        </CheckBox>
+
+                        <CheckBox Margin="15,5" x:Name="cbMriStatus"   Content="MRI Status" Height="25" Foreground="#cfcfcf"  
+                                         Checked="cbMriStatus_Checked"  >
+                            <CheckBox.Resources>
+                                <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#00a5e3"/>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00a5e3"/>
+                            </CheckBox.Resources>
+                        </CheckBox>
+
+                        
+                        
+
+                       
+
+                    </StackPanel>
+
+
+
+                </Grid>
+
+                <Syncfusion:SfLinearProgressBar x:Name="progressMeterData"
+                                                Visibility="Collapsed"       
+                                                ProgressColor="Red" 
+                                                TrackColor="Transparent" 
+                    VerticalAlignment="Bottom" 
+                    Height="1"
+                    IndicatorCornerRadius="10"
+                    IsIndeterminate="True"
+                    Progress="50">
+                    <Syncfusion:SfLinearProgressBar.AnimationEasing>
+                        <BounceEase
+                            Bounces="20"
+                            Bounciness="5"
+                            EasingMode="EaseOut" />
+                    </Syncfusion:SfLinearProgressBar.AnimationEasing>
+                </Syncfusion:SfLinearProgressBar>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Background="#2d2d30">
+                    <TreeView x:Name="myTreeView"  Margin="0 0 0 15"
+                      SelectedItemChanged="myTreeView_SelectedItemChanged"
+                      Background="#2d2d30"   
+                          Style="{StaticResource MaterialDesignTreeView}">
+
+                        <TreeView.ItemContainerStyle>
+                            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Resources>
+                                    <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MaterialDesignTreeViewItem}">
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Style>
+                                </Style.Resources>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
+                    </TreeView>
+                </Grid>
+
+                <Grid Grid.Column="1"  Background="#202020" >
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Margin="15 15 5 5">
+                            <!--<ScrollViewer VerticalScrollBarVisibility="Disabled"    HorizontalScrollBarVisibility="Auto" 
+                                          >
+                                <StackPanel x:Name="stackCurrentData" Orientation="Horizontal" />
+
+                            </ScrollViewer>-->
+
+                            <StackPanel x:Name="stackCurrentData" Orientation="Horizontal" />
+
+
+                            <Grid Grid.Row="1" Background="#00a5e3" Height="1" VerticalAlignment="Bottom" />
+                            
+                            
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="15 0 15 15">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="0"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid>
+                                <m:Map Grid.Row="0" x:Name="myMap"   
+               CredentialsProvider="zFJdLgqsLvBkMt5dggS5~98jwdMIYMsyN00oanZbzdA~AgLWGuqksYFFAFJQ1UsjE4lPEOeXd2dKTz-4mzHmlEpPyCUDlWkYiWGOgCaGI-wk"                          
+               Mode="Aerial"                            
+               Center="27.52, 90.4" 
+               ZoomLevel="8.0" 
+               AnimationLevel="None"  />
+
+                                <Grid  VerticalAlignment="Top"  Margin="10 "  >
+                                    <StackPanel Orientation="Horizontal"  Background="#2d2d30" Opacity="0.8" HorizontalAlignment="Right"   >
+                                        <Button   x:Name="btnMapHome" Background="Transparent" HorizontalAlignment="Center" BorderThickness="0" 
+                                      Height="30" Width="30" Margin="1" Click="btnMapHome_Click">
+                                            <materialDesign:PackIcon Kind="Home"   HorizontalAlignment="Center"  Foreground="White"  Margin="-10" />
+
+                                        </Button>
+                                        <!--<Separator Background="White" />-->
+                                        <Button  x:Name="btnZoomPlus" Background="Transparent" HorizontalAlignment="Center" BorderThickness="0"
+                                     Height="30" Width="30" Margin="1" Click="btnZoomPlus_Click">
+                                            <materialDesign:PackIcon Kind="Plus"   Foreground="White"   Margin="-10"/>
+                                        </Button>
+                                        <!--<Separator Background="White" />-->
+                                        <Button  x:Name="btnZoomMinus" Background="Transparent" HorizontalAlignment="Center" BorderThickness="0" 
+                                     Height="30" Width="30" Margin="1" Click="btnZoomMinus_Click" >
+                                            <materialDesign:PackIcon Kind="Minus"    Foreground="White"  Margin="-10" />
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid VerticalAlignment="Top" x:Name="stkAllData"  Margin="0 50 0 0 " >
+                                    
+                                    <StackPanel  Margin="0,0,11,0" Grid.ColumnSpan="2">
+                                        <ListBox  x:Name="listBoxDtId" Foreground="White" HorizontalContentAlignment="Center" 
+                                             HorizontalAlignment="Right"  Width="150"
+                                             VerticalAlignment="Top"    Background="#202020" Opacity=".8"  MaxHeight="300"  >
+                                        </ListBox>
+
+
+                                        <Label Background="Red" Height="1"  HorizontalAlignment="Right" Width="150" />
+                                        <Button x:Name="btnViewDataAll"  Content="ViewData" HorizontalAlignment="Right" FontSize="12" Background="#202020"  BorderThickness="0" 
+                                                 Width="150"   MouseRightButtonDown="btnViewDataAll_MouseRightButtonDown"   />
+                                        
+                                     
+                                      
+                                    </StackPanel>
+
+                                </Grid>
+
+
+                            </Grid>
+
+
+                            <Grid>
+                                <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"             
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                                    <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                                        <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                                    </Syncfusion:SfCircularProgressBar.AnimationEasing>
+                                </Syncfusion:SfCircularProgressBar>
+                            </Grid>
+                        </Grid>
+
+                    </Grid>
+
+                    <Grid  x:Name="GridMeterDataView">
+
+                    </Grid>
+                </Grid>
+
+
+            </Grid>
+
+        </Grid>
+
+
+        
+
+
+    </Grid>
+</UserControl>

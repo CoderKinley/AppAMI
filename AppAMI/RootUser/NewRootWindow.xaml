@@ -1,0 +1,296 @@
+﻿<Window x:Class="AppAMI.RootUser.NewRootWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAMI.RootUser" xmlns:Syncfusion="clr-namespace:Syncfusion.UI.Xaml.ProgressBar;assembly=Syncfusion.SfProgressBar.WPF" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="NewRootWindow" Height="660"  Width="450" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+
+
+    <Window.Resources>
+       
+       
+    </Window.Resources>
+
+    <Grid>
+        <Grid   >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="#2d2d30">
+                <Label Content="Enter Root User Information" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Bottom"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="60 20 ">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <!--<Label x:Name="lblCurrentRootEmail" Visibility="Collapsed" />
+                <TextBox  x:Name="txtUserId" Visibility="Collapsed"   />-->
+                <PasswordBox  x:Name="passPassword"  Visibility="Collapsed" />
+                <!--<TextBox x:Name="txtUserRole" Text="Root User" Visibility="Collapsed"  />-->
+
+                <StackPanel Grid.Row="0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Name" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtName" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="1">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Organization" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <ComboBox Name="cbOrganization" 
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+
+
+
+                </StackPanel>
+
+
+
+                <StackPanel Grid.Row="2">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Department" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <ComboBox Name="cbDepartment" 
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="3">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Designation" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <ComboBox Name="cbDesignation" 
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="4">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Email" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="(***)" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtEmail" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="5">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Phone" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtPhone" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="6">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Employee Id" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtEmployeeId" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+
+
+
+                </StackPanel>
+
+                <Button  Grid.Row="7" Grid.ColumnSpan="2" x:Name="btnVeriCode"  Content="Request OTP" Background="#00cdac"   BorderThickness="0"  Margin="30 0"  Click="btnVeriCode_Click" />
+
+
+                <StackPanel Grid.Row="8">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="OTP Current User" 
+                  HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtOtpCurrent" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="9">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="OTP New User" 
+                  HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtOtpNew" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <Grid  Grid.Row="10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <Button    x:Name="btnRootSignOutConfirm"   Margin="30 0" Background="#00a5e3" BorderThickness="0" Click="btnRootSignOutConfirm_Click"   >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave"          HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Save" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+
+
+                    <Button   Grid.Column="1"    Margin="30 0" Background="#ff5768" BorderThickness="0" Click="Button_Click"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cancel"         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Cancel" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid>
+            <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"             
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </Syncfusion:SfCircularProgressBar.AnimationEasing>
+            </Syncfusion:SfCircularProgressBar>
+        </Grid>
+    </Grid>
+
+    
+
+    
+</Window>
+
+
+<!--<Syncfusion:SfCircularProgressBar x:Name="progressbar" Grid.Row="8" Grid.ColumnSpan="2" Grid.RowSpan="3" 
+        Width="50"
+        Height="50"
+                                              Visibility="Collapsed" 
+                                                  IndicatorCornerRadius="5" 
+                                                  IndicatorInnerRadius="0.6"
+                                                  TrackInnerRadius="0.6"
+        IsIndeterminate="True"
+        Progress="50"
+        ShowProgressValue="False">
+    <Syncfusion:SfCircularProgressBar.AnimationEasing>
+        <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+    </Syncfusion:SfCircularProgressBar.AnimationEasing>
+</Syncfusion:SfCircularProgressBar>-->

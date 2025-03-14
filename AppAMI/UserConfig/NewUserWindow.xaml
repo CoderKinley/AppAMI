@@ -1,0 +1,248 @@
+﻿<Window x:Class="AppAMI.UserConfig.NewUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAMI.UserConfig" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="NewUserWindow" Height="540"  Width="450" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+
+
+    <Window.Resources>
+       
+    </Window.Resources>
+
+
+
+    
+
+    <Grid>
+        <Grid   >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="#2d2d30">
+                <Label Content="Enter New User Information" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Bottom"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Margin="60 20 ">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <TextBox x:Name="txtUserId"  Visibility="Collapsed"   />
+
+                <PasswordBox  x:Name="passPassword"    Visibility="Collapsed" />
+
+
+
+                <StackPanel Grid.Row="0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Name" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtName" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+
+
+
+                </StackPanel>
+
+
+
+                <StackPanel Grid.Row="1">
+                    <StackPanel   Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Organization" 
+                   HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+                    <ComboBox Name="cbOrganization" 
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="2">
+                    <StackPanel   Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Department" 
+                   HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <ComboBox Name="cbDepartment" 
+
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="3">
+                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Designation" 
+                   HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <ComboBox  Name="cbDesignation" 
+                           HorizontalAlignment="Stretch"  VerticalAlignment="Center" />
+
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4">
+                    <StackPanel Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="User Role" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                        <Label Content="(***)" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+                    </StackPanel>
+
+                    <ComboBox Name="cbUserRole" HorizontalAlignment="Stretch"  VerticalAlignment="Center"  >
+                        <ComboBoxItem x:Name="cbOperator" Content="Operator" Selected="cbOperator_Selected" ></ComboBoxItem>
+                        <ComboBoxItem x:Name="cbBasicUser" Content="Basic User" Selected="cbBasicUser_Selected"  ></ComboBoxItem>
+                    </ComboBox>
+
+
+                </StackPanel>
+
+
+
+                <StackPanel Grid.Row="5">
+                    <StackPanel  Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Email" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                        <Label Content="(***)" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+                    </StackPanel>
+
+                    <TextBox Grid.Row="4" x:Name="txtEmail"  VerticalContentAlignment="Bottom" VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel  Grid.Row="6">
+                    <StackPanel    Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Phone" 
+                   HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                   HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox  x:Name="txtPhone"  VerticalContentAlignment="Bottom" VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="7">
+                    <StackPanel  Grid.Row="6"   Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Employee Id" 
+                   HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                  HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtEmployeeId"  VerticalContentAlignment="Bottom" VerticalAlignment="Center"  />
+
+
+                </StackPanel>
+
+                <Grid  Grid.Row="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                      
+                    </Grid.ColumnDefinitions>
+
+                    <Button   Grid.Column="0"   Background="#00cdac" BorderThickness="0" Margin="30 0"  Click="SaveButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave"        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Save" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+
+                    <Button   Grid.Column="1"     Background="#ff5768" BorderThickness="0" Margin="30 0"  Click="Button_Click"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cancel"         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Cancel" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+
+
+                </Grid>
+
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid>
+            <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"         
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </Syncfusion:SfCircularProgressBar.AnimationEasing>
+            </Syncfusion:SfCircularProgressBar>
+        </Grid>
+    </Grid>
+</Window>

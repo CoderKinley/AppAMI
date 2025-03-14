@@ -1,0 +1,80 @@
+﻿<Window x:Class="AppAMI.Login.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="LoginWindow" 
+        FontFamily="Segoe UI Emoji" 
+        Height="500" Width="350" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None">
+
+
+    <Grid Background="#202020" >
+        <Grid >
+            <Rectangle Height="300" VerticalAlignment="Top" Fill="#cfcfcf"  >
+               
+            </Rectangle>
+            
+            <Rectangle Width="260" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="10" RadiusX="10" Fill="#2d2d30">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                </Rectangle.Effect>
+            </Rectangle>
+
+            <Button x:Name="btnClose" Content="Close" FontSize="9" VerticalAlignment="Bottom"  HorizontalAlignment="Right" BorderThickness="0"  Background="Transparent"  Click="btnClose_Click" />
+            <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240" x:Name="grdLogIn">
+                <Label Content="LOGIN" Foreground="#00a5e3"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5"  FontSize="18"/>
+                <StackPanel VerticalAlignment="Center" Margin="40 15">
+                    <StackPanel Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="User"   Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                        <Label Content="User Id" Foreground="#cfcfcf" Margin="10 0"/>
+                    </StackPanel>
+                    <TextBox x:Name="txtUserId" Text="u1020602249" HorizontalContentAlignment="Center"   Foreground="#cfcfcf"    Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" />
+
+                    <StackPanel Orientation="Horizontal" >
+                        <materialDesign:PackIcon Kind="Password"    Foreground="#00a5e3" HorizontalAlignment="Center"     VerticalAlignment="Center"  />
+                        <Label Content="Password" Foreground="#cfcfcf" Margin="10 0"/>
+                    </StackPanel>
+                    <PasswordBox x:Name="passPassword" Password="Kumar@12345"  HorizontalContentAlignment="Center"  Foreground="#cfcfcf"   Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines"/>
+
+                </StackPanel>
+            </Grid>
+
+
+            <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"     
+                ProgressContent="Loading..."
+                Margin="0 58 0 0"  
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </Syncfusion:SfCircularProgressBar.AnimationEasing>
+            </Syncfusion:SfCircularProgressBar>
+            
+            <Button Width="150" x:Name="btnLogin" HorizontalAlignment="Center" Background="#00a5e3" VerticalAlignment="Bottom" Margin="0,60" Content="Login" Click="Button_Click" />
+
+           
+
+
+
+            <Image Source="D:\AppAMI\AppAMI\Assets\logoMain.PNG" Height=" 100" VerticalAlignment="Top" Margin="30"/>
+
+
+            <Label Content="omniAMI" HorizontalAlignment="Center" Margin="0 135" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"   />
+        </Grid>
+
+    </Grid>
+    
+</Window>

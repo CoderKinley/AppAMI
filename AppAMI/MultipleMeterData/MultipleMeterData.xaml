@@ -1,0 +1,1732 @@
+﻿<UserControl x:Class="AppAMI.MultipleMeterData.MultipleMeterData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppAMI.MultipleMeterData"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1270">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#2d2d30"/>
+            <Setter Property="BorderBrush"  Value="#202020 " />
+            <Setter Property="BorderThickness"  Value="0,0,0,2" />
+            <Setter Property="Foreground" Value="#cfcfcf" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"  />
+            <Setter Property="VerticalContentAlignment" Value="Top" />
+            <Setter Property="IsTabStop" Value="False" />
+            <Setter Property="Width"  Value="auto" />
+            <Setter Property="Padding"  Value="20 10" />
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="Wrap" Text="{Binding}"></TextBlock>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#202020"/>
+                    <Setter Property="Foreground" Value="#cfcfcf"/>
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"   Background="#2d2d30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+
+
+            <CheckBox x:Name="cbInstantPara" Grid.Column="1"  Margin="20 7" HorizontalAlignment="Center"  Foreground="#cfcfcf" IsThreeState="False"  
+                      Content="Instaneous Parameter" Checked="cbInstantPara_Checked" Unchecked="cbInstantPara_Unchecked" >
+
+                <CheckBox.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#ffbf65"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#ffbf65"/>
+                </CheckBox.Resources>
+            </CheckBox>
+
+            <CheckBox x:Name="cbBilling" Grid.Column="2"  Margin="20 7"  HorizontalAlignment="Center" Foreground="#cfcfcf" IsThreeState="False"  
+                      Content="Billing" Checked="cbBilling_Checked" Unchecked="cbBilling_Unchecked" >
+
+                <CheckBox.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#ffbf65"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#ffbf65"/>
+                </CheckBox.Resources>
+            </CheckBox>
+
+            <CheckBox x:Name="cbLoadSurvey" Grid.Column="3"  Margin="20 7"  HorizontalAlignment="Center" Foreground="#cfcfcf" IsThreeState="False"  
+                      Content="Load Survey" Checked="cbLoadSurvey_Checked" Unchecked="cbLoadSurvey_Unchecked"  >
+
+                <CheckBox.Resources>
+                    <SolidColorBrush x:Key="MaterialDesignCheckBoxOff" Color="#ffbf65"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#ffbf65"/>
+                </CheckBox.Resources>
+            </CheckBox>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#202020" >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+
+            <Grid  Background="#2d2d30">
+                
+                <Grid>
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Label Content="Available Meters" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" >
+                            <Label Content="By Location: " Foreground="White" VerticalAlignment="Center" />
+                            <TextBox x:Name="txtSearchLoc" Foreground="White" Width="100" VerticalAlignment="Center" 
+                                     TextChanged="txtSearchLoc_TextChanged" />
+                        </StackPanel>
+                    </Grid>
+                    <DataGrid Grid.Row="3" Name="meterdgv" Background="Transparent" BorderBrush="#202020"   AutoGenerateColumns="False"  HorizontalAlignment="Center"  IsReadOnly="True" 
+                              SelectedCellsChanged="dataGrid_SelectedCellsChanged">
+
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="#2d2d30" />
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#202020"/>
+                                        <Setter Property="Foreground" Value="#cfcfcf"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+
+                        <DataGrid.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                        <Setter Property="BorderBrush">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="#202020"  />
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="#202020" />
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.Columns>
+
+
+
+                            <DataGridTextColumn Header="Meter No."  Binding="{Binding  Path=meterno , Mode=Default}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment"  Value="Center" />
+                                        <Setter Property="VerticalAlignment"  Value="Center" />
+                                        <Setter Property="Foreground"  Value="#cfcfcf" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+                            <DataGridTextColumn  Header="Location" Binding="{Binding Path=address, Mode=Default}" >
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment"  Value="Center" />
+                                        <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+
+
+
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </Grid>
+
+
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="15">
+                <Rectangle  RadiusY="5" RadiusX="5" Fill="#2d2d30"   >
+                    <Rectangle.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality"
+                                          ShadowDepth="1" Color="#2d2d30"/>
+                    </Rectangle.Effect>
+                </Rectangle>
+
+                <Grid  Margin="15">
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Label x:Name="lblSelectedMePara"  VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+
+
+
+                    </Grid>
+
+                    <!--<Grid x:Name="grdMeterData" Grid.Row="1" >
+                        
+                    </Grid>-->
+
+                    <StackPanel Grid.Row="1" x:Name="stkInstantPara">
+
+
+                        <DataGrid Name="dgvInstantPara" Background="Transparent" BorderBrush="#202020"   AutoGenerateColumns="False"  HorizontalAlignment="Center"  IsReadOnly="True"  
+                                  SelectionChanged="dgvInstantPara_SelectionChanged" 
+                                   >
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="#2d2d30" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#202020"/>
+                                            <Setter Property="Foreground" Value="#cfcfcf"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020"  />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Header="Meter No." Binding="{Binding  Path=meterno , Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Date"  Binding="{Binding   Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Time"  Binding="{Binding Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IR"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IY"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Current, IB"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRN"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VYN"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Voltage, VBN"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRY"  Binding="{Binding Path=ctratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VBY"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed power factor, R-phase"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, Y-phase"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, B-phase"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+                                <DataGridTextColumn Header="Three phase power factor, PF"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Frequency"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Apparent power, kVA"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed active power, kW(+ Forward; – Reverse)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed reactive power, kvar(+ Lag; – Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Number of power-failures"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative power- failure duration"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative tamper count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative billing count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative programming count"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Billing date"  Binding="{Binding Path=manu_year, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kWh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lag)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kVAh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                        <DataGrid Name="dgvInstantParaSum" Background="Transparent" BorderBrush="#202020"   AutoGenerateColumns="False"  HorizontalAlignment="Center"  IsReadOnly="True"  
+                                  SelectionChanged="dgvInstantPara_SelectionChanged" >
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="Red"   />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#202020"/>
+                                            <Setter Property="Foreground" Value="#cfcfcf"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020"  />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+
+
+
+                                <DataGridTextColumn Header="Meter No." Binding="{Binding  Path=meterno , Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Date"  Binding="{Binding   Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Time"  Binding="{Binding Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IR"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IY"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Current, IB"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRN"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VYN"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Voltage, VBN"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRY"  Binding="{Binding Path=ctratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VBY"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed power factor, R-phase"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, Y-phase"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, B-phase"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+                                <DataGridTextColumn Header="Three phase power factor, PF"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Frequency"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Apparent power, kVA"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed active power, kW(+ Forward; – Reverse)"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed reactive power, kvar(+ Lag; – Lead)"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Number of power-failures"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative power- failure duration"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative tamper count"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative billing count"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative programming count"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Billing date"  Binding="{Binding Path=manu_year, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kWh"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lag)"  Binding="{Binding Path=latitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lead)"  Binding="{Binding Path=vtratioSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kVAh"  Binding="{Binding Path=longitudeSum, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+
+
+
+                        <DataGrid Name="dgvBilling" Background="Transparent" BorderBrush="#202020"   AutoGenerateColumns="False"  HorizontalAlignment="Center"  IsReadOnly="True"  >
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="#2d2d30" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#202020"/>
+                                            <Setter Property="Foreground" Value="#cfcfcf"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020"  />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+
+
+
+                                <DataGridTextColumn Header="Meter No." Binding="{Binding  Path=meterno , Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Date"  Binding="{Binding   Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Time"  Binding="{Binding Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IR"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IY"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Current, IB"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRN"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VYN"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Voltage, VBN"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRY"  Binding="{Binding Path=ctratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VBY"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed power factor, R-phase"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, Y-phase"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, B-phase"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+                                <DataGridTextColumn Header="Three phase power factor, PF"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Frequency"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Apparent power, kVA"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed active power, kW(+ Forward; – Reverse)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed reactive power, kvar(+ Lag; – Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Number of power-failures"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative power- failure duration"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative tamper count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative billing count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative programming count"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Billing date"  Binding="{Binding Path=manu_year, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kWh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lag)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kVAh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                        <DataGrid Name="dgvLoadSurvey" Background="Transparent" BorderBrush="#202020"   AutoGenerateColumns="False"  HorizontalAlignment="Center"  IsReadOnly="True"  >
+
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="#2d2d30" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#202020"/>
+                                            <Setter Property="Foreground" Value="#cfcfcf"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="DataGridCell.IsSelected" Value="True">
+                                            <Setter Property="BorderBrush">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020"  />
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Foreground"
+                            Value="{DynamicResource
+                                   {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="#202020" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+
+
+
+                                <DataGridTextColumn Header="Meter No." Binding="{Binding  Path=meterno , Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Date"  Binding="{Binding   Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Time"  Binding="{Binding Path=installationdate, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IR"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Current, IY"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Current, IB"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRN"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VYN"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Voltage, VBN"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VRY"  Binding="{Binding Path=ctratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Voltage, VBY"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed power factor, R-phase"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, Y-phase"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed power factor, B-phase"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+                                <DataGridTextColumn Header="Three phase power factor, PF"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Frequency"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Apparent power, kVA"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Signed active power, kW(+ Forward; – Reverse)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Signed reactive power, kvar(+ Lag; – Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Number of power-failures"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative power- failure duration"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative tamper count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative billing count"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative programming count"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Billing date"  Binding="{Binding Path=manu_year, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kWh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lag)"  Binding="{Binding Path=latitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kvarh (Lead)"  Binding="{Binding Path=vtratio, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Cumulative energy, kVAh"  Binding="{Binding Path=longitude, Mode=Default}">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="HorizontalAlignment" Value="Center" />
+                                            <Setter Property="VerticalAlignment"  Value="Center" />
+                                            <Setter Property="Foreground"  Value="#cfcfcf" />
+
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+
+
+
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                    </StackPanel>
+                </Grid>
+
+
+
+            </Grid>
+
+
+
+
+        </Grid>
+
+    </Grid>
+</UserControl>

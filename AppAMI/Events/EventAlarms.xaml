@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="AppAMI.Events.EventAlarms"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AppAMI.Events"
+             mc:Ignorable="d" 
+              d:DesignHeight="530" d:DesignWidth="1070">
+
+
+    <Grid Background="#202020" Margin="15"  >
+        <Grid Background="#2d2d30">
+            <Label HorizontalAlignment="Center" 
+               VerticalAlignment="Center" 
+               Content="Alarms" Foreground="white"/>
+
+        </Grid>
+    </Grid>
+    
+</UserControl>

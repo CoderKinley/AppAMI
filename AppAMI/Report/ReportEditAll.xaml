@@ -1,0 +1,668 @@
+﻿<Window x:Class="AppAMI.Report.ReportEditAll"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAMI.Report"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="ReportEditAll" Height="600" Width="1200" WindowStartupLocation="CenterScreen" WindowStyle="None"  >
+  
+    <Grid>
+        <Grid >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="#2d2d30">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"   >
+                    <Label Content="Update POI of " Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                    <Label x:Name="lblDtId"  Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Bottom"/>
+
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1" Margin="20">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                    <RowDefinition Height=".6*"/>
+
+                </Grid.RowDefinitions>
+
+
+
+                <TextBox   x:Name="txtRegionName" Visibility="Collapsed" />
+                <TextBox   x:Name="txtRegionCode" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtDistrictName" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtDistrictCode" Visibility="Collapsed"/>
+                <!--<TextBox   x:Name="txtEsdName" Visibility="Collapsed"/>-->
+                <TextBox   x:Name="txtEsdCode" Visibility="Collapsed"/>
+                <!--<TextBox   x:Name="txtFeederId" Visibility="Collapsed"/>-->
+                <TextBox   x:Name="txtPortionId" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtRootId" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtDtId" Visibility="Collapsed"/>
+
+                <TextBox   x:Name="txtTransformerSerialNumber" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtDtMeterSerialNo" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtMriSerialNo" Visibility="Collapsed"/>
+                <TextBox   x:Name="txtFeederName" Visibility="Collapsed"/>
+              
+                <!--<TextBox   x:Name="txtTripDate" Visibility="Collapsed"/>-->
+
+                <!--<TextBox   x:Name="txtTripTime" Visibility="Collapsed"/>-->
+                <!--<TextBox   x:Name="txtRestoreDate" Visibility="Collapsed"/>-->
+                <!--<TextBox   x:Name="txtRestoreTime" Visibility="Collapsed"/>-->
+                <!--<TextBox   x:Name="txtDuration" Visibility="Collapsed"/>-->
+                <!--<TextBox   x:Name="txtNoOfCustomersAffected" Visibility="Collapsed"/>-->
+
+
+                <StackPanel Grid.Row="0" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="ESD Name" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtEsdName" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  IsEnabled="False"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Feeder Id" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtFeederId" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  IsEnabled="False"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Tripping Id" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTrippingId" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" IsEnabled="False"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Substation" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtSubstation" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Tripping Point" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTrippingPoint" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="0" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Substation Relay Indication" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtSubstationIndication" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" />
+
+                </StackPanel>
+
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Trip Date" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTripDate" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" IsEnabled="False" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Trip Time" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTripTime" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" IsEnabled="False" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Restore Date" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtRestoreDate" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  IsEnabled="False"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Restore Time" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtRestoreTime" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  IsEnabled="False"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Duration" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtDuration" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" IsEnabled="False" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="1" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="No. of Customer" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtNoOfCustomersAffected" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  IsEnabled="False"/>
+
+                </StackPanel>
+
+
+
+
+                <StackPanel Grid.Row="0" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Type of Tripping" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTypeofTripping" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="How was the Incident Identified" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtHowEventIdentified" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Weather Condition" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtWeatherCondition" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Start Time From Station" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtStartTimeStation" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="End Journey at Fault Location" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtEndJourneyAtFaultLocation" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="2" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Mode of Transport" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtModeofTransport" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                
+                
+                
+                <StackPanel Grid.Row="0" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Road Condition" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtRoadCondition" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Maintenance Type" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtMaintenanceType" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Work Carried Out" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtWorkCarriedOut" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Name of Equipment" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtNameOfEquipment" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Causes of Outage" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtCausesOfOutage" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="3" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Impact Reason" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtImpactReason" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+             
+                
+                
+                
+
+                <StackPanel Grid.Row="0" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Responsible Person" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtResponsiblePerson" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Target Completion Date" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtTargetCompletionDate" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Status" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtStatus" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Repair Cost" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtRepairCost" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Customer Compensation" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtCustomerCompensation" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5" Grid.Column="5" Margin="20 0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Affected Area" 
+                  HorizontalAlignment="Left"  
+                    />
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  
+                    />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtAffectedArea" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+
+                
+                <Grid  Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="2" Margin="20 0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Content="Elaborate the Cause of Outages" 
+                  HorizontalAlignment="Left"  
+                    />
+
+                    <TextBox Grid.Row="1"  x:Name="txtElaborateCauseOfOutages" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                     TextWrapping="Wrap"   HorizontalContentAlignment="Left" VerticalContentAlignment="Top" />
+
+
+                </Grid>
+
+
+
+                <StackPanel Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button  Name="btnEdit"   Margin="50 0 " Background="#00cdac" BorderThickness="0"  Click="btnEdit_Click"     >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave"        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Save" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+
+                    <Button   x:Name="btnClose"    Margin="50 0" Background="#ff5768" BorderThickness="0" Click="btnClose_Click"  >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cancel"         HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 10 0" />
+                            <Label Content="Cancel" Foreground="white" Margin="-5" />
+
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+
+
+
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid>
+            <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"               
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </Syncfusion:SfCircularProgressBar.AnimationEasing>
+            </Syncfusion:SfCircularProgressBar>
+        </Grid>
+    </Grid>
+
+</Window>

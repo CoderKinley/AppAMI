@@ -1,0 +1,655 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F3D5AA2-A1FC-4B85-8F61-F0DB20F95DBE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AppAMI</RootNamespace>
+    <AssemblyName>omniAMI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\AppBuildBpc\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>36</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>8925AAEDC4970FBA78333984D8BBAE476662D331</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>AppAMI_1_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logoMain.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=4.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.4.4.0\lib\net462\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="M2Mqtt.Net, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\M2Mqtt.4.3.0.0\lib\net45\M2Mqtt.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.9\lib\net47\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.1.2.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.1.2\lib\net462\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.8.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.8.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Maps.MapControl.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Maps.MapControl.WPF.1.0.0.3\lib\net40-Client\Microsoft.Maps.MapControl.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="MQTTnet, Version=4.1.4.563, Culture=neutral, PublicKeyToken=fdb7629f2e364a63, processorArchitecture=MSIL">
+      <HintPath>..\packages\MQTTnet.4.1.4.563\lib\net461\MQTTnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.21.1.39\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Data.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Data.WPF.21.1.39\lib\net46\Syncfusion.Data.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=21.1460.41.0, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.21.1.41\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.21.1.39\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfChart.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfChart.WPF.21.1.39\lib\net46\Syncfusion.SfChart.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGauge.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGauge.WPF.21.1.39\lib\net46\Syncfusion.SfGauge.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGrid.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGrid.WPF.21.1.39\lib\net46\Syncfusion.SfGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGridConverter.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.DataGridExcelExport.Wpf.21.1.39\lib\net46\Syncfusion.SfGridConverter.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfProgressBar.WPF, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfProgressBar.WPF.21.1.39\lib\net46\Syncfusion.SfProgressBar.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=21.1460.41.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.21.1.41\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.WPF, Version=21.1460.41.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.WPF.21.1.41\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=21.1460.39.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.XlsIO.Wpf.21.1.39\lib\net46\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.CodeDom, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CodeDom.7.0.0\lib\net462\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="BillingAll\BillingAll.xaml.cs">
+      <DependentUpon>BillingAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\AdminConfig.cs" />
+    <Compile Include="Classes\AdminConfigPost.cs" />
+    <Compile Include="Classes\BillingClass.cs" />
+    <Compile Include="Classes\District.cs" />
+    <Compile Include="Classes\DT.cs" />
+    <Compile Include="Classes\DtMeter.cs" />
+    <Compile Include="Classes\ESD.cs" />
+    <Compile Include="Classes\FirmwareVerCode.cs" />
+    <Compile Include="Classes\LoadSurveyTab.cs" />
+    <Compile Include="Classes\MeterEvents.cs" />
+    <Compile Include="Classes\MqttClass.cs" />
+    <Compile Include="Classes\Mri.cs" />
+    <Compile Include="Classes\Nms.cs" />
+    <Compile Include="Classes\NmsMriClass.cs" />
+    <Compile Include="Classes\Region.cs" />
+    <Compile Include="Classes\ReliabilityIndexClass.cs" />
+    <Compile Include="Classes\ReportDt.cs" />
+    <Compile Include="Classes\RootUserClass.cs" />
+    <Compile Include="Classes\RootUserUpdateClass.cs" />
+    <Compile Include="Classes\UserCount.cs" />
+    <Compile Include="Classes\UserEvent.cs" />
+    <Compile Include="Classes\UserEventPost.cs" />
+    <Compile Include="Events\Events.xaml.cs">
+      <DependentUpon>Events.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GIS\GIS.xaml.cs">
+      <DependentUpon>GIS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InstantAll\InstantAll.xaml.cs">
+      <DependentUpon>InstantAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadSurveyAll1\LoadSurveyAll1.xaml.cs">
+      <DependentUpon>LoadSurveyAll1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LoadSurveyAll\LoadSurveyAll.xaml.cs">
+      <DependentUpon>LoadSurveyAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Login\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\AddDtFromExcelWindow.xaml.cs">
+      <DependentUpon>AddDtFromExcelWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\AddDtWindow.xaml.cs">
+      <DependentUpon>AddDtWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\AddEsdWindow.xaml.cs">
+      <DependentUpon>AddEsdWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\DeleteDtWindow.xaml.cs">
+      <DependentUpon>DeleteDtWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\DeleteMeterWindow.xaml.cs">
+      <DependentUpon>DeleteMeterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\DeleteMriWindow.xaml.cs">
+      <DependentUpon>DeleteMriWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\UpdateDtWindow.xaml.cs">
+      <DependentUpon>UpdateDtWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\UpdateMeterWindow.xaml.cs">
+      <DependentUpon>UpdateMeterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\UpdateMriWindow.xaml.cs">
+      <DependentUpon>UpdateMriWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\ViewMeterWindow.xaml.cs">
+      <DependentUpon>ViewMeterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterConfig\ViewMriWindow.xaml.cs">
+      <DependentUpon>ViewMriWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\BillingTabular.xaml.cs">
+      <DependentUpon>BillingTabular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\Events.xaml.cs">
+      <DependentUpon>Events.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\InstantaneousCustom.xaml.cs">
+      <DependentUpon>InstantaneousCustom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\InstantaneousSelector.xaml.cs">
+      <DependentUpon>InstantaneousSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\InstantaneousTypical.xaml.cs">
+      <DependentUpon>InstantaneousTypical.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\LoadSurveyTabular.xaml.cs">
+      <DependentUpon>LoadSurveyTabular.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\LoadSurveyTabular1.xaml.cs">
+      <DependentUpon>LoadSurveyTabular1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\MeterData.xaml.cs">
+      <DependentUpon>MeterData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\NMS.xaml.cs">
+      <DependentUpon>NMS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\ReliabilityIndices.xaml.cs">
+      <DependentUpon>ReliabilityIndices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\ReportMeter.xaml.cs">
+      <DependentUpon>ReportMeter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MeterData\uscNmsMri.xaml.cs">
+      <DependentUpon>uscNmsMri.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MriFirmware\NewFirmwareWindow.xaml.cs">
+      <DependentUpon>NewFirmwareWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MriFirmware\NewFirmwareWindowAll.xaml.cs">
+      <DependentUpon>NewFirmwareWindowAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewPasswordWindow.xaml.cs">
+      <DependentUpon>NewPasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NmsMri\NmsMri.xaml.cs">
+      <DependentUpon>NmsMri.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NMS\NMS.xaml.cs">
+      <DependentUpon>NMS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReliabilityIndices\ReliabilityIndices.xaml.cs">
+      <DependentUpon>ReliabilityIndices.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Report\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportEditAll.xaml.cs">
+      <DependentUpon>ReportEditAll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\DeleteAdminWindow.xaml.cs">
+      <DependentUpon>DeleteAdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\MeterDropDownWindow.xaml.cs">
+      <DependentUpon>MeterDropDownWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\MriDropDownWindow.xaml.cs">
+      <DependentUpon>MriDropDownWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\NewAdminWindow.xaml.cs">
+      <DependentUpon>NewAdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\NewRootWindow.xaml.cs">
+      <DependentUpon>NewRootWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\RootUser.xaml.cs">
+      <DependentUpon>RootUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\UpdateAdminSetAccWindow.xaml.cs">
+      <DependentUpon>UpdateAdminSetAccWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\UpdateRootWindow.xaml.cs">
+      <DependentUpon>UpdateRootWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RootUser\UserDropDownWindow.xaml.cs">
+      <DependentUpon>UserDropDownWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\DeleteUserWindow.xaml.cs">
+      <DependentUpon>DeleteUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\NewUserWindow.xaml.cs">
+      <DependentUpon>NewUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\UpdateOperatorSetAccWindow.xaml.cs">
+      <DependentUpon>UpdateOperatorSetAccWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\UpdateUserWindow.xaml.cs">
+      <DependentUpon>UpdateUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\UserConfiguration.xaml.cs">
+      <DependentUpon>UserConfiguration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserConfig\WebUserAdd.xaml.cs">
+      <DependentUpon>WebUserAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel1.cs" />
+    <Page Include="BillingAll\BillingAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Events\Events.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GIS\GIS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InstantAll\InstantAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadSurveyAll1\LoadSurveyAll1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LoadSurveyAll\LoadSurveyAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MeterConfig\AddDtFromExcelWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\AddDtWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\AddEsdWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\DeleteDtWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\DeleteMeterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\DeleteMriWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\MeterConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\UpdateDtWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\UpdateMeterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\UpdateMriWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\ViewMeterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterConfig\ViewMriWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\BillingTabular.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\Events.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\InstantaneousCustom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\InstantaneousSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\InstantaneousTypical.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\LoadSurveyTabular.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\LoadSurveyTabular1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\MeterData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\NMS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\ReliabilityIndices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\ReportMeter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MeterData\uscNmsMri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MriFirmware\NewFirmwareWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MriFirmware\NewFirmwareWindowAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NmsMri\NmsMri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NMS\NMS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReliabilityIndices\ReliabilityIndices.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Report\Report.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Report\ReportEditAll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\DeleteAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\MeterDropDownWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\MriDropDownWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\NewAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\NewRootWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\RootUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\UpdateAdminSetAccWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\UpdateRootWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RootUser\UserDropDownWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\DeleteUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\NewUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\UpdateOperatorSetAccWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\UpdateUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\UserConfiguration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserConfig\WebUserAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MeterConfig\MeterConfiguration.xaml.cs">
+      <DependentUpon>MeterConfiguration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="AppAMI_1_TemporaryKey.pfx" />
+    <None Include="AppAMI_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileDepartment.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileDesignation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileOrganization.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileMeterType.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileFirmwareVerMeter.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileFirmwareVerMri.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="xmlFiles\FileVerMri.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logoMain.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.8.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

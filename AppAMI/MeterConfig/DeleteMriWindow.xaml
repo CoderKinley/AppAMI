@@ -1,0 +1,213 @@
+﻿<Window x:Class="AppAMI.MeterConfig.DeleteMriWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AppAMI.MeterConfig" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        Title="DeleteMriWindow" Height="511" Width="300" WindowStyle="None" WindowStartupLocation="CenterScreen" >
+
+    <Window.Resources>
+
+        <XmlDataProvider x:Key="MriItems" Source="D:\AppBPC\BackUp\AppAMI8\AppAMI\AppAMI\xmlFiles\FileVerMri.xml" />
+        <XmlDataProvider x:Key="MriFirmwareItems" Source="D:\AppBPC\BackUp\AppAMI8\AppAMI\AppAMI\xmlFiles\FileFirmwareVerMri.xml" />
+
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid >
+            <Grid.RowDefinitions >
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Background="#2d2d30">
+                <Label Content="MRI Information" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"  VerticalContentAlignment="Bottom"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="40 20">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height=".6*"/>
+
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="DT ID"  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="(***)" Foreground="Gray" 
+                    HorizontalAlignment="Left" />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtDTId" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" IsReadOnly="True"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="1">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="MRI Serial No."  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  />
+
+                    </StackPanel>
+
+                    <TextBox   x:Name="txtMriSerialNo" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="MRI Version"  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  />
+
+                    </StackPanel>
+
+                    <!--<TextBox   x:Name="txtMeterType" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />-->
+                    <ComboBox Name="cbMriVersion" 
+
+                           ItemsSource="{Binding Source={StaticResource MriItems}, XPath=VerMri/versionMri}"
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Firmware Version"  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  />
+
+                    </StackPanel>
+
+                    <!--<TextBox   x:Name="txtMeterFirmwareVer" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />-->
+
+                    <ComboBox Name="cbMriFirmwareVer" 
+
+                           ItemsSource="{Binding Source={StaticResource MriFirmwareItems}, XPath=FirmwareVerMri/vFirmwMri}"
+                          HorizontalAlignment="Stretch"  VerticalAlignment="Center"/>
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="4">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Manufacturing year"  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  />
+
+                    </StackPanel>
+
+                    <!--<TextBox   x:Name="txtMeterManuYear" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />-->
+                    <DatePicker x:Name="dtMriManuYear" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" />
+
+
+                </StackPanel>
+
+                <StackPanel Grid.Row="5">
+
+                    <StackPanel      Orientation="Horizontal"  VerticalAlignment="Top" >
+                        <Label Content="Installation Date"  HorizontalAlignment="Left"  />
+
+
+                        <Label Content="" Foreground="Gray" 
+                    HorizontalAlignment="Left"  />
+
+                    </StackPanel>
+
+                    <!--<TextBox   x:Name="txtMeterInstallationDate" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center"  />-->
+                    <DatePicker x:Name="dttxtMriInstallationDate" VerticalContentAlignment="Bottom" 
+                     VerticalAlignment="Center" 
+                            />
+
+                </StackPanel>
+
+
+
+
+
+                <StackPanel Grid.Row="6" Grid.ColumnSpan="4"  Visibility="Collapsed"    >
+                    <Label  x:Name="lblUpdateUrl" HorizontalAlignment="Center" />
+                    <Label  x:Name="lblReadUrl" HorizontalAlignment="Center" />
+                </StackPanel>
+
+
+                <Grid Grid.Row="6" Grid.ColumnSpan=" 4" Margin="-35 0">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+
+                    </Grid.ColumnDefinitions>
+
+
+
+
+                    <Button  Grid.Column="0"  Name="btnUpdate"   Margin="35 0" Background="#ff5768" BorderThickness="0"   Click="btnUpdate_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Delete"           HorizontalAlignment="Center" VerticalAlignment="Center"  />
+
+                        </StackPanel>
+                    </Button>
+
+                    <Button  Grid.Column="1"  x:Name="btnClose"    Margin="35 0" Background="#00a5e3" BorderThickness="0"  Click="btnClose_Click" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Cancel"           HorizontalAlignment="Center" VerticalAlignment="Center"  />
+
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+
+
+            </Grid>
+
+
+        </Grid>
+
+        <Grid>
+            <Syncfusion:SfCircularProgressBar 
+                x:Name="progressLogin"
+                Visibility="Collapsed"                       
+                ProgressContent="Loading..."
+               
+                Width="100" 
+                Height="100" 
+                IsIndeterminate="True"  
+                ShowProgressValue="False">
+                <Syncfusion:SfCircularProgressBar.AnimationEasing>
+                    <BounceEase
+                Bounces="20"
+                Bounciness="5"
+                EasingMode="EaseOut" />
+                </Syncfusion:SfCircularProgressBar.AnimationEasing>
+            </Syncfusion:SfCircularProgressBar>
+        </Grid>
+    </Grid>
+
+</Window>
